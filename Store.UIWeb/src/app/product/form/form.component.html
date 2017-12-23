@@ -1,0 +1,73 @@
+<br />
+<div class="row h-100 justify-content-center">
+    <mat-card class="col-xs-12 col-sm-12 col-md-8 col-lg-4 align-self-center">
+
+        <mat-card-header>
+            <mat-card-title class="w-100">
+                <h5 class="text-center" *ngIf="product.isNew"><mat-icon>add</mat-icon> Registrar producto</h5>
+                <h5 class="text-center" *ngIf="!product.isNew"><mat-icon>edit</mat-icon> Editar producto</h5>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div>
+                <form [formGroup]="productForm" (ngSubmit)="onSave()">
+                    <div class="content-full-width">
+                        <mat-input-container class="content-full-width">
+                            <input matInput placeholder="Codigo" formControlName="code" />
+                            
+                        </mat-input-container>
+                        <div *ngIf="formErrors.code" class="text-danger">
+                            <span> {{ formErrors.code}} </span>
+                        </div>
+                        <mat-input-container class="content-full-width">
+                            <input matInput placeholder="Nombre" formControlName="name" />
+                        </mat-input-container>
+                        <div *ngIf="formErrors.name" class="text-danger">
+                            <span> {{ formErrors.name}} </span>
+                        </div>
+                        <mat-input-container class="content-full-width">
+                            <input matInput placeholder="Precio" formControlName="price" />
+                        </mat-input-container>
+                        <div *ngIf="formErrors.price" class="text-danger">
+                            <span> {{ formErrors.price}} </span>
+                        </div>
+
+
+                        <mat-input-container class="content-full-width">
+                            <input matInput placeholder="Stock" formControlName="stock" />
+                        </mat-input-container>
+                        <div *ngIf="formErrors.stock" class="text-danger">
+                            <span> {{ formErrors.stock}} </span>
+                        </div>
+
+                        <mat-form-field >
+                            <mat-select placeholder="Seleccionar categoria" name="categoryCode" formControlName="categoryCode">
+                                <mat-option *ngFor="let item of categories;" [value]="item.code" >{{item.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-checkbox formControlName="isXml">Guardar en XML</mat-checkbox>
+
+                        <div class="row px-2">
+
+
+                            <button class="col" mat-raised-button type="reset"  color="warn">
+                                <mat-icon>delete_sweep</mat-icon>Cancelar
+                            </button>
+                            <button class="col mx-2" mat-raised-button type="submit" color="primary">
+                                <mat-icon>save</mat-icon> Guardar
+                            </button>
+                        </div>
+                        <div class="row col-12 p-0">
+                            <span *ngIf="messageSuccess" class="alert alert-success col-12 ml-2 mt-2">
+                                {{messageSuccess}}
+                            </span>
+                            <span *ngFor="let item of messages" class="alert alert-danger col-12 ml-2 mt-2">
+                                {{item.description}}
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,45 @@
+<app-form (onCallback)="onSearch()"></app-form>
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <mat-input-container class="form-control">
+                <input matInput placeholder="Buscar producto"   [(ngModel)]="filterValue" name="afilterValue" (keyup.enter)="onSearch()"/>
+            </mat-input-container>
+            <mat-checkbox [(ngModel)]="isXml" (change)="onSearch()">Buscar en XML</mat-checkbox>
+        </div>
+        
+        <div class="col-2">
+            <button class="btn btn-outline-success" (click)="onNew()">
+                <mat-icon>add</mat-icon>
+                Nuevo
+            </button>
+        </div>
+        
+    </div>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"> </th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Categoria</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of products;">
+                <th scope="row">
+                    <mat-icon style="cursor:pointer;" (click)="onDelete(item.code, item.isXml)">delete</mat-icon>
+                    <mat-icon style="cursor:pointer;" (click)="onEdit(item)">edit</mat-icon>
+                </th>
+                <td>{{item.code}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.stock}}</td>
+                <td>{{item.categoryName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
